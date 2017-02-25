@@ -1,3 +1,4 @@
 /logs/err-info.log
 /logs/verbose.log
 node_modules
+.idea/
