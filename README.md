@@ -5,7 +5,7 @@ StaffPortal, a community driven project to aid in monitoring popular platforms l
 
 
 ## Installation
-1. First run 'npm install' in the same directory as the package.json.  This will install all the dependencys.
+1. First run 'npm install' in the same directory as the package.json.  This will install all the dependencies.
 
 
 ## Contributing
