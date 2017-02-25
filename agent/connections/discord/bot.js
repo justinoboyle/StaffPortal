@@ -5,7 +5,7 @@ exports.info = {
 
 exports.runPlugin = function () {
     const Discord = require('discord.js');
-    const logging = module.exports.logging = require("../../../modules/console.js")
+    const logging = require("../../../modules/console.js")
     const fs = require("fs");
     const didYouMean = require('didyoumean');
 
@@ -404,4 +404,4 @@ exports.runPlugin = function () {
     });
 
     client.login(config.botToken);
-}
+};

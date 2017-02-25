@@ -1,3 +1,5 @@
+const logging = require("../../../../../modules/console.js");
+
 exports.info = {
     name: 'Base',
     usage: 'Usage',

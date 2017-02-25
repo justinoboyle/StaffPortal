@@ -1,3 +1,5 @@
+const logging = require("../../../../../modules/console.js");
+
 exports.info = {
     name: 'eval',
     usage: 'eval <code>',
@@ -15,8 +17,8 @@ exports.run = function (bot, msg, args) {
         msg.channel.sendMessage('```xl\n' + clean(evaled) + '\n```');
     }
     catch (err) {
-        bot.logging.error('Error while trying eval, Error: ' + err);
-        bot.logging.debug('Error stacktrace: ' + err.stack);
+        logging.error('Error while trying eval, Error: ' + err);
+        logging.debug('Error stacktrace: ' + err.stack);
     }
 };
 
