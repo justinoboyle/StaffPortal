@@ -1,13 +1,14 @@
-const logging = require("./modules/console.js") //Load in console agent
+const logging = require("./modules/console.js")
 const os = require("os")
 const cluster = require('cluster');
 try {
+  const server = require("./server/server.js")
   if (cluster.isMaster) {
-    for (var I = 0; I < 4; I++) {
+    for (var I = 0; I < os.cpus().length; I++) {
       cluster.fork()
     }
   } else {
-    logging.warn("Warn everyone!", {hell: "here"})
+    
   }
 }
 catch(err) {
