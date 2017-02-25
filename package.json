@@ -4,13 +4,16 @@
   "description": "Connect your staff team!",
   "main": "start.js",
   "scripts": {
-    "dev": "nodemon start"
+    "start-dev": "nodemon .",
+    "start": "node .",
+    "build-dev": "webpack -w",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TCDG/StaffPortal.git"
   },
-  "author": "Gilbert Gobbels",
+  "author": "Gilbert Gobbels, Andrew Fluck, Shaun O'Niell, Jacob Wiltse, Justin O'Boyle, George Peppard",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/TCDG/StaffPortal/issues"
