@@ -19,7 +19,7 @@ exports.runPlugin = function () {
     let TESTING_PREFIX = '!!';
 
     client.on('ready', () => {
-        logging.info(`Discord bot successfully running on ${client.guilds.array().length} servers!`);
+        logging.log(`Discord bot successfully running on ${client.guilds.array().length} servers!`);
         logging.debug(`Running on the following servers: [${client.guilds.array()}}`);
 
         loadCommandsAndPlugins();
@@ -375,7 +375,7 @@ exports.runPlugin = function () {
             let command = require(`./botModules/commands/${file}`);
             if (typeof command.run !== 'function' || typeof command.info !== 'object' || typeof command.info.name !== 'string') {
 
-                logging.info(`Invalid command file: ${file}`);
+                logging.log(`Invalid command file: ${file}`);
                 return;
             }
             commands[command.info.name] = command;
@@ -396,7 +396,7 @@ exports.runPlugin = function () {
             pluginsCount++;
         });
 
-        console.info(`Successfully loaded ${pluginsCount} plugins!`);
+        console.log(`Successfully loaded ${pluginsCount} plugins!`);
     }
 
     process.on("unhandledRejection", err => {
