@@ -12,6 +12,7 @@ exports.runPlugin = function () {
 
     let commands = module.exports.commands = {};
     let botPlugins = module.exports.botPlugins = [];
+    let botMaintainers = module.exports.botMaintainers = ['182210823630880768']; //XeliteXirish
 
     client.on('ready', () => {
         logging.info(`Discord bot successfully running on ${client.guilds.array().length} servers!`);
