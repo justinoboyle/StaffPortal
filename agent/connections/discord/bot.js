@@ -348,7 +348,7 @@ function loadCommandsAndPlugins() {
         }
         commands[command.info.name] = command;
         pluginsCount++;
-    })
+    });
 
     // Plugins and events
     fs.readdirSync(__dirname + '/botModules/pluginEvents').forEach(file => {
