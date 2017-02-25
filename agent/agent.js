@@ -11,7 +11,7 @@ exports.initPlugins = function () {
         if (file.startsWith('_') || !file.endsWith('.js')) return;
         let plugin = require(file);
 
-        if (typeof plugin.runPlugin !== 'function' || typeof plugin.info !== 'object') {
+        if (typeof plugin.runPlugin !== 'function' || typeof plugin.info !== 'object' || typeof plugin.info.enabled !== 'boolean') {
             logging.error(`Invalid plugin file ${file}`);
             return;
         }

@@ -1,5 +1,6 @@
 exports.info = {
-    name: 'Discord Bot'
+    name: 'Discord Bot',
+    enabled: true
 }
 
 exports.runPlugin = function () {
