@@ -6,13 +6,16 @@ exports.runPlugin = function () {
     const Discord = require('discord.js');
     const logging = require("../../../modules/console.js")
     const fs = require("fs");
+    const didYouMean = require('didyoumean');
 
     const client = exports.client = new Discord.Client();
     const config = exports.config = require('./discordConfig.json');
 
     let commands = module.exports.commands = {};
     let botPlugins = module.exports.botPlugins = [];
+
     let botMaintainers = module.exports.botMaintainers = ['182210823630880768']; //XeliteXirish
+    let TESTING_PREFIX = '!!';
 
     client.on('ready', () => {
         logging.info(`Discord bot successfully running on ${client.guilds.array().length} servers!`);
@@ -191,6 +194,28 @@ exports.runPlugin = function () {
     });
 
     client.on('message', (message) => {
+
+        let cmd = message.content.split(' ')[0].substr(TESTING_PREFIX);
+        let args = message.content.split(' ').splice(1);
+
+        if (commands[cmd]) {
+            try {
+                commands[cmd].run(client, message, args);
+
+            } catch (err) {
+                logging.error(`Error performing command ${cmd}, Error: ${err}`);
+                logging.debug(`Error stack trace: ${err.stack}`);
+            }
+        } else {
+            let maybe = didYouMean(cmd, Object.keys(commands), {
+                threshold: 5,
+                thresholdType: 'edit-distance'
+            });
+            if (maybe) {
+                message.reply(`:question: Did you mean \`${TESTING_PREFIX}${maybe}\`?`).then(m => m.delete(5000));
+            }
+        }
+
         botPlugins.forEach(plugin => {
             if (typeof plugin.onMessage === 'function') {
                 plugin.onMessage(message);

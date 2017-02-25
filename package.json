@@ -18,6 +18,7 @@
   "homepage": "https://github.com/TCDG/StaffPortal#readme",
   "dependencies": {
     "colors": "^1.1.2",
+    "didyoumean": "^1.2.1",
     "discord.js": "^11.0.0",
     "mkdirp": "^0.5.1",
     "nodemon": "^1.11.0",
