@@ -4,7 +4,7 @@
   "description": "Connect your staff team!",
   "main": "start.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon start"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,9 @@
   "homepage": "https://github.com/TCDG/StaffPortal#readme",
   "dependencies": {
     "colors": "^1.1.2",
+    "discord.js": "^11.0.0",
     "mkdirp": "^0.5.1",
+    "nodemon": "^1.11.0",
     "winston": "^2.3.1"
   }
 }
