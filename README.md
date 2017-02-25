@@ -27,4 +27,8 @@ http://nvie.com/posts/a-successful-git-branching-model/
 
 ## Credits
 
-Authors: GilbertGobbels, XeliteXirish, Newtsrock, Inventor02, Kelwing
+* GilbertGobbels, Project Creator, Key Developer
+* XeliteXirish, Key Developer, Discord Connection Agent
+* Newtsrock, Key Developer, Web Interface
+* Kelwing, Developer, Structure Manager
+* Inventor02, Contributor
