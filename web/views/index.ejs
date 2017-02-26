@@ -3,12 +3,13 @@
 <head>
     <meta name="theme-color" content="#ffffff">
     <meta charset="UTF-8">
-    <title>Staff Portal</title>
+    <title>StaffPortal</title>
     <style><%- css %></style>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
 <div id="app-mount"><%- markup %></div>
+<script>window.__INITIAL_APP_STATE = <%- JSON.stringify(initialState)%></script>
 <script src="/js/bundle.min.js"></script>
 </body>
 </html>
