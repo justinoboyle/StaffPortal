@@ -26,7 +26,7 @@ function reducer(state) {
 router.get('*', (req, res) => {
     // Setup Redux initial state & store.
     let initialState = {
-        title: ''
+        title: 'test'
     };
     let store = createStore(reducer, initialState);
 
@@ -64,7 +64,7 @@ router.get('*', (req, res) => {
         return res.render('index', {
             markup,
             css: fs.readFileSync(path.join(__dirname, '..', '..', 'web', 'static', 'css', 'styles.css')),
-            initialState: {}
+            initialState
         });
     });
 });

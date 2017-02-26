@@ -1,47 +1,15 @@
+// React
 import React from 'react';
-import { Route, IndexRoute, Link } from 'react-router';
+import { Route, IndexRoute } from 'react-router';
 
-import NotFound from './404'
-import Header from '../Header'
-import Input from '../Input';
+import App from './App';
+import About from './About';
+import Home from './Home';
+import Login from './Login';
+import NotFound from './404';
 
-const Layout = (props) => (
-    <div>
-        <Header nav={[
-            {name: 'Home', to: '/'},
-            {name: 'About', to: '/about'},
-            {name: 'Login', to: '/login'},
-        ]}/>
-        <main className="main">{props.children}</main>
-    </div>
-);
-
-const Home = (props) => (
-    <div className="heading">
-        <span className="small">Welcome to</span>
-        <h1 className="strike">StaffPortal</h1>
-    </div>
-);
-
-const About = (props) => (
-    <div className="heading">
-        <span className="small-nonfix">About Us</span>
-    </div>
-);
-
-const Login = (props) => (
-    <div>
-        <div className="heading">
-            <span className="small-nonfix">Login</span>
-        </div>
-        <Input label="Username or Email"/>
-        <Input label="Password" password={true}/>
-        <button className="button">Login</button>
-    </div>
-);
-
-const routes = (
-    <Route path="/" component={Layout}>
+const Routes = (
+    <Route path="/" component={App}>
         <IndexRoute component={Home}/>
         <Route path="about" component={About}/>
         <Route path="login" component={Login}/>
@@ -49,4 +17,4 @@ const routes = (
     </Route>
 );
 
-export default routes;
+export default Routes;
