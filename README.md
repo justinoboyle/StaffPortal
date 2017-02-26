@@ -1,9 +1,22 @@
+<img src="logo.png" align="right" height="150" width="150" />
 # StaffPortal
 
 StaffPortal, a community driven project to aid in monitoring popular platforms like Discord
 
+
+## Installation
+1. First run 'npm install' in the same directory as the package.json.  This will install all the dependencies.
+
+
+## Contributing
 Want to contribute? Have a read through this first;
 http://nvie.com/posts/a-successful-git-branching-model/
+
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
 
 ### Currently active branches:
 * development - For active development that doesn't fit elsewhere
@@ -11,3 +24,11 @@ http://nvie.com/posts/a-successful-git-branching-model/
 * feature-webui -  For active development on the web interface
 * feature-slack - For active development on the slack agent
 * master - for stable releases ONLY
+
+## Credits
+
+* GilbertGobbels, Project Creator, Key Developer
+* XeliteXirish, Key Developer, Discord Connection Agent
+* Newtsrock, Key Developer, Web Interface
+* Kelwing, Developer, Structure Manager
+* Inventor02, Contributor
