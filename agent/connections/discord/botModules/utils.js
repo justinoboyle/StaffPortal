@@ -81,3 +81,12 @@ exports.cleanZalgo = function (string) {
 
     return string.replace(/[^\x00-\x7F]*$/g, '');
 };
+
+exports.getGuildLogChannel = function (guild) {
+    return new Promise((resolve, reject) => {
+
+        let logChannel = guild.channels.find('name', 'Log'); //TODO get this from the bot installer
+        if (logChannel) resolve(logChannel);
+        else reject;
+    })
+}
