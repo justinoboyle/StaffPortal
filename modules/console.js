@@ -216,6 +216,17 @@ if (cluster.isMaster) {
             logging.logging("Worker sent unknown message data, message is ignored",{"worker_id":worker.id,"msg_data":msg.data})
           }
           break;
+        case "db":
+          if (msg.data == "ready") {
+            worker_db_ready++
+            logging.logging("Worker connected to DB")
+            if (worker_db_ready == os.cpus().length) {
+              logging.info("All workers are connected to MongoDB")
+            }
+          } else {
+            logging.logging("Worker sent unknown message data, message is ignored",{"worker_id":worker.id,"msg_data":msg.data})
+          }
+          break;
         default:
           logging.logging("Worker sent unknown message subject, message is ignored",{"worker_id":worker.id,"msg_subject":msg.subject})
       }
