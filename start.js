@@ -8,8 +8,9 @@ try {
             cluster.fork()
         }
     } else {
-        require("./server");
-        console.log('Process ' + process.pid + ' is listening to all incoming requests')
+      //Set workers to listen for incoming connections  
+      require("./server");
+      
     }
 } catch (err) {
     logging.crit("A critical error occured!", {error_name: err.name, error_message: err.message})

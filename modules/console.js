@@ -190,11 +190,11 @@ if (cluster.isMaster) {
       }
     } else if (msg.type == "status") {
       switch(msg.subject) {
-        case "WebUI":
+        case "web":
           if (msg.data == "ready") {
             worker_ui_ready++
-            logging.logging("Worker started Web UI", {"worker_id":worker.id})
-            if (worker_ui_ready == 4) {
+            logging.logging("Worker interface is listening for incoming connections", {"worker_id":worker.id})
+            if (worker_ui_ready == os.cpus().length) {
               logging.info("Web Interface started successfully");
             }
           } else if (msg.data == "error") {
@@ -207,7 +207,7 @@ if (cluster.isMaster) {
           if (msg.data == "ready") {
             worker_agent_ready++
             logging.logging("Worker started Agent", {"worker_id":worker.id})
-            if (worker_agent_ready == 4) {
+            if (worker_agent_ready == os.cpus().length) {
               logging.info("Third-Party Agent started successfully!")
             }
           } else if (msg.data == "error") {

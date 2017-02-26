@@ -1,4 +1,6 @@
 #!/usr/bin/env node
+// Cluster
+const cluster = require('cluster');
 
 // Express
 import express from 'express';
@@ -40,5 +42,11 @@ app.use((req, res, next) => {
     next()
 });
 
-// Start listening on defined port
-app.listen(app.get('port'));
+// Start listening on defined port & notify master
+app.listen(app.get('port'), () => {
+  cluster.worker.send({
+    "type": "status",
+    "subject": "web",
+    "data":"ready"
+  });
+});
