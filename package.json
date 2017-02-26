@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/TCDG/StaffPortal#readme",
   "dependencies": {
+    "@slack/client": "^3.8.1",
     "colors": "^1.1.2",
     "didyoumean": "^1.2.1",
     "discord.js": "^11.0.0",
