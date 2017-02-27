@@ -17,37 +17,40 @@ exports.runPlugin = function() {
 
   // NPM dependencies
   const RtmClient = require("@slack/client").RtmClient;
-  const CLIENT_EVENTS = require("@slack/client").CLIENT_EVENTS;
+  const RTM_EVENTS = require("@slack/client").RTM_EVENTS;
 
   // Slack API init
   const rtm = new RtmClient(config.token);
 
   // Commands
   const commands = {
-    "hi": require("./modules/cmd/hi.js")
+    "hi": require("./modules/cmd/hi"),
+    "help": require("./modules/cmd/help")
   };
   
+  // Export the commands
+  module.exports.commands = commands;
+
   rtm.start();
-  
+
   // Events
   //    Authenticated
-  rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, function(rtmStartData) {
+  rtm.on(RTM_EVENTS.AUTHENTICATED, function(rtmStartData) {
     console.log(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}, but not yet connected to a channel`);
   });
-  
+
   //    Message
-  rtm.on(CLIENT_EVENTS.MESSAGE, function handleRtmMessage(message) {
-    console.log(message);
-    
-    if(message.text.startsWith(config.prefix)) {
-      let cmd = message.text.split(" ")[0];
-      let args = message.text.split(" ").slice("1");
-      
-      for(let command in commands) {
-        if(command.command === cmd) {
-          console.log(`[Command] User ${message.user} executed in ${command.channel}: ${message.text}`);
-          command.runCommand(rtm, message, args);
-        }
+  rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
+    if (message.text.startsWith(config.prefix)) {
+
+      let args = message.text.split(" ");
+      let cmd = args.shift().toLowerCase().replace(config.prefix, "");
+
+      let actualCommand = commands[cmd];
+
+      if (actualCommand !== undefined) {
+        console.log(`[Command] User ${message.user} executed in ${message.channel}: ${message.text}`);
+        actualCommand.runCommand(rtm, message, args);
       }
     }
   });
