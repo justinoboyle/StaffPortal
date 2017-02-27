@@ -2,3 +2,5 @@
 /logs/verbose.log
 node_modules
 .idea/
+
+.vscode/
