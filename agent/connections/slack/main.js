@@ -4,7 +4,7 @@
  */
 
 exports.info = {
-  "name": "Slack Integration",
+  "name": "Slack RTM Integration",
   "enabled": true
 };
 
@@ -27,19 +27,30 @@ exports.runPlugin = function() {
     "hi": require("./modules/cmd/hi.js")
   };
   
+  rtm.start();
+  
   // Events
+  //    Authenticated
+  rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, function(rtmStartData) {
+    console.log(`Logged in as ${rtmStartData.self.name} of team ${rtmStartData.team.name}, but not yet connected to a channel`);
+  });
+  
   //    Message
-  rtm.on(RTM_EVENTS.MESSAGE, function handleRtmMessage(message) {
+  rtm.on(CLIENT_EVENTS.MESSAGE, function handleRtmMessage(message) {
+    console.log(message);
+    
     if(message.text.startsWith(config.prefix)) {
       let cmd = message.text.split(" ")[0];
       let args = message.text.split(" ").slice("1");
       
       for(let command in commands) {
         if(command.command === cmd) {
-          logging.log(`[Command] User ${message.user} executed in ${command.channel}: ${message.text}`);
+          console.log(`[Command] User ${message.user} executed in ${command.channel}: ${message.text}`);
           command.runCommand(rtm, message, args);
         }
       }
     }
   });
 };
+
+exports.runPlugin();
