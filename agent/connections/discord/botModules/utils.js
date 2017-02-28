@@ -108,4 +108,15 @@ exports.getStaffRole = function (guild) {
         if (staffRole) resolve(staffRole);
         else reject();
     })
-}
+};
+
+/**
+ * Checks if a user has a permission or if they are part of the dev team
+ * @param message
+ * @param permission
+ * @returns {boolean}
+ */
+exports.hasPermission = function (message, permission) {
+    if (bot.botMaintainers.includes(message.author.id)) return true;
+    return (message.channel.permissionsFor(message.author).hasPermission(permission));
+};
