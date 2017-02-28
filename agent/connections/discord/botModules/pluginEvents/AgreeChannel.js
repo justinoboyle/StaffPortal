@@ -2,7 +2,7 @@ const logging = require("../../../../../modules/console.js");
 const utils = require('./../utils');
 
 exports.info = {
-    name: 'Welcome-Messages'
+    name: 'Agree-Channel'
 };
 
 exports.onMessage = function (message) {
