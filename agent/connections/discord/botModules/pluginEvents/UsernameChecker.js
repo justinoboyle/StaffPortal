@@ -44,7 +44,7 @@ function checkUsername(guildMember) {
             }
         })
     }).catch(err => {
-        logging.error('Error retrieving banned words, Error: ' + err.name);
+        logging.error('Error retrieving banned words, Error: ' + err.message);
         logging.debug('Error stack trace: ' + err.stack);
     })
 }

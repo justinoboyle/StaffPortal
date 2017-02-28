@@ -82,11 +82,30 @@ exports.cleanZalgo = function (string) {
     return string.replace(/[^\x00-\x7F]*$/g, '');
 };
 
+/**
+ * Returns the guild log channel if there is one
+ * @param guild
+ * @returns {Promise}
+ */
 exports.getGuildLogChannel = function (guild) {
     return new Promise((resolve, reject) => {
 
         let logChannel = guild.channels.find('name', 'Log'); //TODO get this from the bot installer
         if (logChannel) resolve(logChannel);
-        else reject;
+        else reject();
+    })
+};
+
+/**
+ * Returns the staff role if there is one
+ * @param guild
+ * @returns {Promise}
+ */
+exports.getStaffRole = function (guild) {
+    return new Promise((resolve, reject) => {
+
+        let staffRole = guild.roles.find('name', 'Staff');
+        if (staffRole) resolve(staffRole);
+        else reject();
     })
 }
