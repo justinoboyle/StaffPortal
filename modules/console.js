@@ -101,7 +101,6 @@ var logging = new (winston.Logger)({
       timestamp: () => {return new Date().toUTCString()},
       formatter: function(options) {
         var worker_id = options.meta.worker_id;
-        delete options.meta.worker_id;
         if (options.level == "crit") {
           return (`(${options.timestamp()}) (Worker: ${worker_id ? worker_id : "master"}) (${"CRITICAL".bgRed})` + ` ${options.message ? options.message : "Unknown Critical Error Occured"}` + `${(options.meta && Object.keys(options.meta).length ? "\n\t" + JSON.stringify(options.meta) : "").red}`+`\n\t\tStaffPortal can not continue and will shutdown.`).bold;
         } else {
@@ -116,7 +115,6 @@ var logging = new (winston.Logger)({
       timestamp: () => {return new Date().toUTCString()},
       formatter: function(options) {
         var worker_id = options.meta.worker_id;
-        delete options.meta.worker_id;
         if (options.level == "crit") {
           return (`(${options.timestamp()}) (Worker: ${worker_id ? worker_id : "master"}) (${"CRITICAL"})` + ` ${options.message ? options.message : "Unknown Critical Error Occured"}` + `${(options.meta && Object.keys(options.meta).length ? "\n\t" + JSON.stringify(options.meta) : "")}`+`\n\t\tStaffPortal can not continue and will shutdown.`);
         } else {
@@ -135,7 +133,6 @@ var logging = new (winston.Logger)({
       timestamp: () => {return new Date().toUTCString()},
       formatter: function(options) {
         var worker_id = options.meta.worker_id;
-        delete options.meta.worker_id;
         if (options.level == "crit") {
           return (`(${options.timestamp()}) (Worker: ${worker_id ? worker_id : "master"}) (${"CRITICAL"})` + ` ${options.message ? options.message : "Unknown Critical Error Occured"}` + `${(options.meta && Object.keys(options.meta).length ? "\n\t" + JSON.stringify(options.meta) : "")}`+`\n\t\tStaffPortal can not continue and will shutdown.`);
         } else {
@@ -157,7 +154,6 @@ if (process.argv[2] == "DEBUG") {
       timestamp: () => {return new Date().toUTCString()},
       formatter: function(options) {
         var worker_id = options.meta.worker_id;
-        delete options.meta.worker_id;
         if (options.level == "crit") {
           return (`(${options.timestamp()}) (Worker: ${worker_id ? worker_id : "master"}) (${"CRITICAL"})` + ` ${options.message ? options.message : "Unknown Critical Error Occured"}` + `${(options.meta && Object.keys(options.meta).length ? "\n\t" + JSON.stringify(options.meta) : "")}`+`\n\t\tStaffPortal can not continue and will shutdown.`);
         } else {
@@ -181,6 +177,7 @@ winston.addColors(clevels.colors);
 if (cluster.isMaster) {
   worker_ui_ready = 0;
   worker_agent_ready = 0;
+  worker_db_ready = 0;
   cluster.on("message", (worker, msg, hande) => {
     if (!msg.type || msg.type == "log") {
       msg.data.worker_id = worker.id
@@ -212,6 +209,17 @@ if (cluster.isMaster) {
             }
           } else if (msg.data == "error") {
             logging.warn("A worker has suffered an error while attempting to start the Web Interface. Worker has been restared.", {"worker_id":worker.id,"err_name":msg.err.name,"err_message":msg.err.message});
+          } else {
+            logging.logging("Worker sent unknown message data, message is ignored",{"worker_id":worker.id,"msg_data":msg.data})
+          }
+          break;
+        case "db":
+          if (msg.data == "ready") {
+            worker_db_ready++
+            logging.logging("Worker connected to DB")
+            if (worker_db_ready == os.cpus().length) {
+              logging.info("All workers are connected to MongoDB")
+            }
           } else {
             logging.logging("Worker sent unknown message data, message is ignored",{"worker_id":worker.id,"msg_data":msg.data})
           }
