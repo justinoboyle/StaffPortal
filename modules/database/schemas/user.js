@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const authSchema = require('./userAuth')
 const userConfigSchema = require('./userConfig')
 const punishmentSchema = require('./punishment')
-const connectionSchema = require('./connection')
+const userConnectionSchema = require('./userConnection')
 
 module.exports = new mongoose.Schema({
   auth: authSchema,
@@ -11,5 +11,5 @@ module.exports = new mongoose.Schema({
   id: {type: String, unique: true},
   date_created: {type: Date},
   punishments: punishmentSchema,
-  connections: [connectionSchema]
+  connections: [userConnectionSchema]
 })
