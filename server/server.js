@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Cluster
-const cluster = require('cluster');
+import cluster from 'cluster';
 
 // Express
 import express from 'express';
@@ -8,10 +8,10 @@ import minifyHTML from 'express-minify-html';
 import ejs from 'ejs';
 
 // Configuration
-import * as config from './config.json';
+import config from './config.json';
 
 // Native Modules
-import * as path from 'path';
+import path from 'path';
 
 const app = express();
 const port = process.env.PORT || config.port;
@@ -23,18 +23,7 @@ app.set('views', path.join(__dirname, '..', 'web', 'views'));
 app.set('view engine', 'ejs');
 
 // Middleware
-app.use(minifyHTML({
-    override: true,
-    exception_url: false,
-    htmlMinifier: {
-        removeComments: true,
-        collapseWhitespace: true,
-        collapseBooleanAttributes: true,
-        removeAttributeQuotes: true,
-        removeEmptyAttributes: true,
-        minifyJS: true
-    }
-}));
+app.use(minifyHTML(config.expressMinify));
 app.use('/', express.static(path.join(__dirname, '..', 'web', 'static')));
 app.use('/', require('./routes'));
 app.use((req, res, next) => {
