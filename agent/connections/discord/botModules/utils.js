@@ -81,3 +81,42 @@ exports.cleanZalgo = function (string) {
 
     return string.replace(/[^\x00-\x7F]*$/g, '');
 };
+
+/**
+ * Returns the guild log channel if there is one
+ * @param guild
+ * @returns {Promise}
+ */
+exports.getGuildLogChannel = function (guild) {
+    return new Promise((resolve, reject) => {
+
+        let logChannel = guild.channels.find('name', 'Log'); //TODO get this from the bot installer
+        if (logChannel) resolve(logChannel);
+        else reject();
+    })
+};
+
+/**
+ * Returns the staff role if there is one
+ * @param guild
+ * @returns {Promise}
+ */
+exports.getStaffRole = function (guild) {
+    return new Promise((resolve, reject) => {
+
+        let staffRole = guild.roles.find('name', 'Staff');
+        if (staffRole) resolve(staffRole);
+        else reject();
+    })
+};
+
+/**
+ * Checks if a user has a permission or if they are part of the dev team
+ * @param message
+ * @param permission
+ * @returns {boolean}
+ */
+exports.hasPermission = function (message, permission) {
+    if (bot.botMaintainers.includes(message.author.id)) return true;
+    return (message.channel.permissionsFor(message.author).hasPermission(permission));
+};
