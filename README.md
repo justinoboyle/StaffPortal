@@ -1,4 +1,5 @@
-<img src="logo.png" align="right" height="150" width="150" />
+<img src="logo.png" align="right" height="150" width="150" />  
+
 # StaffPortal
 
 StaffPortal, a community driven project to aid in monitoring popular platforms like Discord
